@@ -1,4 +1,4 @@
-package nl.tommert.spotify.webapi.model
+package nl.tommert.spotify.webapi.model.generic
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

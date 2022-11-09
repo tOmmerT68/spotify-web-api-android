@@ -2,8 +2,8 @@ package nl.tommert.spotify.webapi.network
 
 import nl.tommert.spotify.webapi.model.Image
 import nl.tommert.spotify.webapi.model.Items
-import nl.tommert.spotify.webapi.model.Playlist
-import nl.tommert.spotify.webapi.model.Track
+import nl.tommert.spotify.webapi.model.response.Playlist
+import nl.tommert.spotify.webapi.model.response.Track
 import nl.tommert.spotify.webapi.model.request.AddTracksToPlaylistRequest
 import nl.tommert.spotify.webapi.model.request.PlaylistRequest
 import nl.tommert.spotify.webapi.model.request.RemovePlaylistItemsRequest

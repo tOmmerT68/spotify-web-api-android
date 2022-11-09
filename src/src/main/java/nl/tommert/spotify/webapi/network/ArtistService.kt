@@ -1,9 +1,9 @@
 package nl.tommert.spotify.webapi.network
 
-import nl.tommert.spotify.webapi.model.Album
+import nl.tommert.spotify.webapi.model.response.Album
 import nl.tommert.spotify.webapi.model.Artist
 import nl.tommert.spotify.webapi.model.Items
-import nl.tommert.spotify.webapi.model.Track
+import nl.tommert.spotify.webapi.model.response.Track
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
