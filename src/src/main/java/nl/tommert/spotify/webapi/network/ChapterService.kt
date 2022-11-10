@@ -15,9 +15,9 @@ interface ChapterService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("$CHAPTERS/{id}")
-    fun getChapter(
+    suspend fun getChapter(
         @Path("id") id: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Chapter
 
     /**
@@ -27,9 +27,9 @@ interface ChapterService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET(CHAPTERS)
-    fun getSeveralChapters(
+    suspend fun getSeveralChapters(
         @Query("ids") ids: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Chapters
 
     companion object {

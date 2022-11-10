@@ -21,9 +21,9 @@ interface AlbumService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("$ALBUMS/{id}")
-    fun getAlbum(
+    suspend fun getAlbum(
         @Path("id") albumId: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Album
 
     /**
@@ -33,9 +33,9 @@ interface AlbumService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET(ALBUMS)
-    fun getAlbums(
+    suspend fun getAlbums(
         @Query("ids") ids: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Array<Album>
 
     /**
@@ -47,11 +47,11 @@ interface AlbumService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("$ALBUMS/{id}/tracks")
-    fun getAlbumTracks(
+    suspend fun getAlbumTracks(
         @Path("id") albumId: String,
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Track>
 
     /**
@@ -62,10 +62,10 @@ interface AlbumService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("me/$ALBUMS")
-    fun getUserSavedAlbums(
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+    suspend fun getUserSavedAlbums(
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Album>
 
     /**
@@ -73,7 +73,7 @@ interface AlbumService {
      * A comma-separated list of the Spotify IDs for the albums. Maximum: 20 IDs.
      */
     @PUT("me/$ALBUMS")
-    fun putUserSavedAlbums(
+    suspend fun putUserSavedAlbums(
         @Query("ids") ids: String,
     )
 
@@ -82,7 +82,7 @@ interface AlbumService {
      * @param ids A JSON array of the Spotify IDs. A maximum of 50 items can be specified in one request.
      */
     @PUT("me/$ALBUMS")
-    fun putUserSavedAlbums(
+    suspend fun putUserSavedAlbums(
         @Body ids: Ids,
     )
 
@@ -91,7 +91,7 @@ interface AlbumService {
      * @param ids A comma-separated list of the Spotify IDs for the albums. Maximum: 20 IDs.
      */
     @DELETE("me/$ALBUMS")
-    fun deleteUserSavedAlbums(
+    suspend fun deleteUserSavedAlbums(
         @Query("ids") ids: String,
     )
 
@@ -100,7 +100,7 @@ interface AlbumService {
      * @param ids A JSON array of the Spotify IDs. A maximum of 50 items can be specified in one request.
      */
     @DELETE("me/$ALBUMS")
-    fun deleteUserSavedAlbums(
+    suspend fun deleteUserSavedAlbums(
         @Body ids: Ids,
     )
 
@@ -109,7 +109,7 @@ interface AlbumService {
      * @param ids A comma-separated list of the Spotify IDs for the albums. Maximum: 20 IDs.
      */
     @GET("me/$ALBUMS/contains")
-    fun getUserSavedAlbumsContains(
+    suspend fun getUserSavedAlbumsContains(
         @Query("ids") ids: String,
     ): Array<Boolean>
 
@@ -121,10 +121,10 @@ interface AlbumService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("browse/new-releases")
-    fun getNewReleases(
-        @Query("country") country: String?,
-        @Query("limit") limit: Int?,
-        @Query("offset") offset: Int?,
+    suspend fun getNewReleases(
+        @Query("country") country: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null,
     ): NewAlbumReleases
 
     companion object {

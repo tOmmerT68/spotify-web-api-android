@@ -20,7 +20,7 @@ interface UserService {
      * Get detailed profile information about the current user (including the current user's username).
      */
     @GET("me")
-    fun getCurrentUsersProfile(): User
+    suspend fun getCurrentUsersProfile(): User
 
     /**
      * Get the current user's top artists or tracks based on calculated affinity.
@@ -31,11 +31,11 @@ interface UserService {
      * medium_term (approximately last 6 months), short_term (approximately last 4 weeks). Default: medium_term
      */
     @GET("me/top/{type}")
-    fun getUsersTopItems(
+    suspend fun getUsersTopItems(
         @Path("type") type: String,
-        @Query("limit") limit: Int?,
-        @Query("offset") offset: Int?,
-        @Query("time_range") time_range: Int?,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null,
+        @Query("time_range") time_range: Int? = null,
     ): Items<Parcelable>
 
     /**
@@ -43,7 +43,7 @@ interface UserService {
      * @param id The user's Spotify user ID.
      */
     @GET("users/{id}")
-    fun getUsersProfile(
+    suspend fun getUsersProfile(
         @Path("id") id: String,
     ): User
 
@@ -53,9 +53,9 @@ interface UserService {
      * @param request The request with all body parameters.
      */
     @POST("playlists/{id}/followers")
-    fun followPlaylist(
+    suspend fun followPlaylist(
         @Path("id") id: String,
-        @Body request: Public?,
+        @Body request: Public? = null,
     )
 
     /**
@@ -63,7 +63,7 @@ interface UserService {
      * @param id The Spotify ID of the playlist.
      */
     @DELETE("playlists/{id}/followers")
-    fun unfollowPlaylist(
+    suspend fun unfollowPlaylist(
         @Path("id") id: String,
     )
 
@@ -74,10 +74,10 @@ interface UserService {
      * @param limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
     @GET("me/following")
-    fun getFollowedArtists(
+    suspend fun getFollowedArtists(
         @Query("type") type: String,
-        @Query("after") after: String?,
-        @Query("limit") limit: Int?,
+        @Query("after") after: String? = null,
+        @Query("limit") limit: Int? = null,
     ): Artists
 
     /**
@@ -87,7 +87,7 @@ interface UserService {
      * @param type The ID type: either artist or user.
      */
     @PUT("me/following")
-    fun followArtistsOrUsers(
+    suspend fun followArtistsOrUsers(
         @Query("ids") ids: String,
         @Query("type") type: String,
     )
@@ -99,7 +99,7 @@ interface UserService {
      * @param type The ID type: either artist or user.
      */
     @PUT("me/following")
-    fun followArtistsOrUsers(
+    suspend fun followArtistsOrUsers(
         @Body request: Ids,
         @Query("type") type: String,
     )
@@ -111,7 +111,7 @@ interface UserService {
      * @param type The ID type: either artist or user.
      */
     @DELETE("me/following")
-    fun unfollowArtistsOrUsers(
+    suspend fun unfollowArtistsOrUsers(
         @Query("ids") ids: String,
         @Query("type") type: String,
     )
@@ -123,7 +123,7 @@ interface UserService {
      * @param type The ID type: either artist or user.
      */
     @DELETE("me/following")
-    fun unfollowArtistsOrUsers(
+    suspend fun unfollowArtistsOrUsers(
         @Body request: Ids,
         @Query("type") type: String,
     )
@@ -135,7 +135,7 @@ interface UserService {
      * @param type The ID type: either artist or user.
      */
     @GET("me/following/contains")
-    fun checkIfUserFollowsArtistsOrUsers(
+    suspend fun checkIfUserFollowsArtistsOrUsers(
         @Query("ids") ids: String,
         @Query("type") type: String,
     ): Array<Boolean>
@@ -146,7 +146,7 @@ interface UserService {
      * @param ids A comma-separated list of Spotify User IDs ; the ids of the users that you want to check to see if they follow the playlist. Maximum: 5 ids.
      */
     @GET("playlists/{id}/followers/contains")
-    fun checkIfUsersFollowPlaylist(
+    suspend fun checkIfUsersFollowPlaylist(
         @Path("id") id: String,
         @Query("ids") ids: String,
     )

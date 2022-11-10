@@ -17,11 +17,11 @@ interface CategoryService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("browse/$CATEGORIES")
-    fun getSeveralBrowseCategories(
-        @Query("country") country: String?,
-        @Query("limit") limit: Int?,
-        @Query("locale") locale: String?,
-        @Query("offset") offset: Int?,
+    suspend fun getSeveralBrowseCategories(
+        @Query("country") country: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("locale") locale: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Category>
 
     /**
@@ -32,10 +32,10 @@ interface CategoryService {
      * For example: es_MX, meaning "Spanish (Mexico)". Provide this parameter if you want the category strings returned in a particular language.
      */
     @GET("browse/$CATEGORIES/{id}")
-    fun getBrowsingCategory(
+    suspend fun getBrowsingCategory(
         @Path("id") id: String,
-        @Query("country") country: String?,
-        @Query("locale") locale: String?,
+        @Query("country") country: String? = null,
+        @Query("locale") locale: String? = null,
     ): Category
 
     companion object {

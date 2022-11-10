@@ -23,13 +23,13 @@ interface SearchService {
      * @param offset The index of the first result to return. Use with limit to get the next page of search results.
      */
     @GET(SEARCH)
-    fun getSearch(
+    suspend fun getSearch(
         @Query("q") query: String,
         @Query("type") type: String,
-        @Query("include_external") includeExternal: String?,
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+        @Query("include_external") includeExternal: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     )
 
     companion object {

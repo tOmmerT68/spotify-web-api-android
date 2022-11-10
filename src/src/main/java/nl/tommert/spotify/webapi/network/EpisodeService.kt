@@ -20,9 +20,9 @@ interface EpisodeService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("$EPISODES/{id}")
-    fun getEpisode(
+    suspend fun getEpisode(
         @Path("id") id: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Episode
 
     /**
@@ -32,9 +32,9 @@ interface EpisodeService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET(EPISODES)
-    fun getSeveralEpisodes(
+    suspend fun getSeveralEpisodes(
         @Query("ids") ids: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Episodes
 
     /**
@@ -45,10 +45,10 @@ interface EpisodeService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("me/$EPISODES")
-    fun getUsersSavedEpisodes(
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+    suspend fun getUsersSavedEpisodes(
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Episode>
 
     /**
@@ -56,7 +56,7 @@ interface EpisodeService {
      * @param ids A comma-separated list of the Spotify IDs. Maximum: 50 IDs.
      */
     @PUT("me/$EPISODES")
-    fun saveEpisode(
+    suspend fun saveEpisode(
         @Query("ids") ids: String,
     )
 
@@ -65,7 +65,7 @@ interface EpisodeService {
      * @param ids A JSON array of the Spotify IDs. A maximum of 50 items can be specified in one request.
      */
     @PUT("me/$EPISODES")
-    fun saveEpisode(
+    suspend fun saveEpisode(
         @Body ids: Ids,
     )
 
@@ -74,7 +74,7 @@ interface EpisodeService {
      * @param ids A comma-separated list of the Spotify IDs. Maximum: 50 IDs.
      */
     @DELETE("me/$EPISODES")
-    fun deleteEpisode(
+    suspend fun deleteEpisode(
         @Query("ids") ids: String,
     )
 
@@ -83,7 +83,7 @@ interface EpisodeService {
      * @param ids A JSON array of the Spotify IDs. A maximum of 50 items can be specified in one request.
      */
     @DELETE("me/$EPISODES")
-    fun deleteEpisode(
+    suspend fun deleteEpisode(
         @Body ids: Ids,
     )
 
@@ -92,7 +92,7 @@ interface EpisodeService {
      * @param ids A comma-separated list of the Spotify IDs for the episodes. Maximum: 50 IDs.
      */
     @GET("me/$EPISODES/contains")
-    fun checkUsersSavedEpisodes(
+    suspend fun checkUsersSavedEpisodes(
         @Query("ids") ids: String,
     ): Array<Boolean>
 

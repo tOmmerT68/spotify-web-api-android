@@ -28,11 +28,11 @@ interface PlaylistService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("$PLAYLISTS/{id}")
-    fun getPlaylist(
+    suspend fun getPlaylist(
         @Path("id") id: String,
-        @Query("additional_types") additionalTypes: String?,
-        @Query("fields") fields: String?,
-        @Query("market") market: String?,
+        @Query("additional_types") additionalTypes: String? = null,
+        @Query("fields") fields: String? = null,
+        @Query("market") market: String? = null,
     ): Playlist
 
     /**
@@ -41,7 +41,7 @@ interface PlaylistService {
      * @param request The request with all body parameters.
      */
     @PUT("$PLAYLISTS/{id}")
-    fun changePlaylistDetails(
+    suspend fun changePlaylistDetails(
         @Path("id") id: String,
         @Body request: PlaylistRequest,
     )
@@ -56,12 +56,12 @@ interface PlaylistService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("$PLAYLISTS/{id}/tracks")
-    fun getPlaylistItems(
+    suspend fun getPlaylistItems(
         @Path("id") id: String,
-        @Query("additional_types") additionalTypes: String?,
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+        @Query("additional_types") additionalTypes: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Track>
 
     /**
@@ -74,10 +74,10 @@ interface PlaylistService {
      * A maximum of 100 items can be added in one request.
      */
     @POST("$PLAYLISTS/{id}/tracks")
-    fun addTracksToPlaylist(
+    suspend fun addTracksToPlaylist(
         @Path("id") id: String,
-        @Query("position") position: Int?,
-        @Query("uris") uris: String?,
+        @Query("position") position: Int? = null,
+        @Query("uris") uris: String? = null,
     ): Snapshot
 
     /**
@@ -86,7 +86,7 @@ interface PlaylistService {
      * @param request The request with all body parameters.
      */
     @POST("$PLAYLISTS/{id}/tracks")
-    fun addTracksToPlaylist(
+    suspend fun addTracksToPlaylist(
         @Path("id") id: String,
         @Body request: AddTracksToPlaylistRequest,
     ): Snapshot
@@ -100,7 +100,7 @@ interface PlaylistService {
      * @param request The request with all body parameters.
      */
     @PUT("$PLAYLISTS/{id}/tracks")
-    fun updatePlaylistItems(
+    suspend fun updatePlaylistItems(
         @Path("id") id: String,
         @Body request: UpdatePlaylistItemsRequest,
     ): Snapshot
@@ -111,7 +111,7 @@ interface PlaylistService {
      * @param request The request with all body parameters.
      */
     @DELETE("$PLAYLISTS/{id}/tracks")
-    fun removePlaylistItems(
+    suspend fun removePlaylistItems(
         @Path("id") id: String,
         @Body request: RemovePlaylistItemsRequest,
     ): Snapshot
@@ -122,9 +122,9 @@ interface PlaylistService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("me/$PLAYLISTS")
-    fun getCurrentUsersPlaylists(
-        @Query("limit") limit: Int?,
-        @Query("offset") offset: Int?,
+    suspend fun getCurrentUsersPlaylists(
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Playlist>
 
     /**
@@ -134,10 +134,10 @@ interface PlaylistService {
      * @param offset The index of the first playlist to return. Default: 0 (the first object). Maximum offset: 100.000. Use with limit to get the next set of playlists.
      */
     @GET("users/{id}/$PLAYLISTS")
-    fun getUsersPlaylist(
+    suspend fun getUsersPlaylist(
         @Path("id") id: String,
-        @Query("limit") limit: Int?,
-        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Playlist>
 
     /**
@@ -146,7 +146,7 @@ interface PlaylistService {
      * @param request The request with all body parameters.
      */
     @POST("users/{id}/$PLAYLISTS")
-    fun createPlaylist(
+    suspend fun createPlaylist(
         @Path("id") id: String,
         @Body request: PlaylistRequest,
     ): Playlist
@@ -163,12 +163,12 @@ interface PlaylistService {
      * If not provided, the response defaults to the current UTC time.
      */
     @GET("browse/featured-$PLAYLISTS")
-    fun getFeaturedPlaylists(
-        @Query("country") country: String?,
-        @Query("limit") limit: Int?,
-        @Query("locale") locale: String?,
-        @Query("offset") offset: Int?,
-        @Query("timestamp") timestamp: String?,
+    suspend fun getFeaturedPlaylists(
+        @Query("country") country: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("locale") locale: String? = null,
+        @Query("offset") offset: Int? = null,
+        @Query("timestamp") timestamp: String? = null,
     )
 
     /**
@@ -179,11 +179,11 @@ interface PlaylistService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("browse/categories/{id}/$PLAYLISTS")
-    fun getCategoryPlaylists(
+    suspend fun getCategoryPlaylists(
         @Path("id") id: String,
-        @Query("country") country: String?,
-        @Query("limit") limit: Int?,
-        @Query("offset") offset: Int?,
+        @Query("country") country: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Playlist>
 
     /**
@@ -191,7 +191,7 @@ interface PlaylistService {
      * @param id The Spotify ID of the playlist.
      */
     @GET("$PLAYLISTS/{id}/images")
-    fun getPlaylistCoverImage(
+    suspend fun getPlaylistCoverImage(
         @Path("id") id: String,
     ): Array<Image>
 

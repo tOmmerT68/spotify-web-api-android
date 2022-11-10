@@ -19,9 +19,9 @@ interface AudiobookService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("$AUDIOBOOKS/{id}")
-    fun getAudiobook(
+    suspend fun getAudiobook(
         @Path("id") id: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Audiobook
 
     /**
@@ -31,9 +31,9 @@ interface AudiobookService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET(AUDIOBOOKS)
-    fun getSeveralAudiobooks(
+    suspend fun getSeveralAudiobooks(
         @Query("ids") ids: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Audiobooks
 
     /**
@@ -45,11 +45,11 @@ interface AudiobookService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("$AUDIOBOOKS/{id}/chapters")
-    fun getAudiobookChapters(
+    suspend fun getAudiobookChapters(
         @Path("id") id: String,
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Chapter>
 
     /**
@@ -58,9 +58,9 @@ interface AudiobookService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("me/$AUDIOBOOKS")
-    fun getUsersSavedAudiobooks(
-        @Query("limit") limit: Int?,
-        @Query("offset") offset: Int?,
+    suspend fun getUsersSavedAudiobooks(
+        @Query("limit") limit: Int? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Audiobook>
 
     /**
@@ -68,7 +68,7 @@ interface AudiobookService {
      * @param ids A comma-separated list of the Spotify IDs. For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
      */
     @PUT("me/$AUDIOBOOKS")
-    fun saveAudiobooks(
+    suspend fun saveAudiobooks(
         @Query("ids") ids: String,
     )
 
@@ -77,7 +77,7 @@ interface AudiobookService {
      * @param ids A comma-separated list of the Spotify IDs. For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
      */
     @DELETE("me/$AUDIOBOOKS")
-    fun removeAudiobooks(
+    suspend fun removeAudiobooks(
         @Query("ids") ids: String,
     )
 
@@ -86,7 +86,7 @@ interface AudiobookService {
      * @param ids A comma-separated list of the Spotify IDs. For example: ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M. Maximum: 50 IDs.
      */
     @GET("me/$AUDIOBOOKS/contains")
-    fun checkUsersSavedAudiobooks(
+    suspend fun checkUsersSavedAudiobooks(
         @Query("ids") ids: String,
     ): Array<Boolean>
 

@@ -9,5 +9,5 @@ interface MarketService {
      * Get the list of markets where Spotify is available.
      */
     @GET("markets")
-    fun getAvailableMarkets(): Markets
+    suspend fun getAvailableMarkets(): Markets
 }

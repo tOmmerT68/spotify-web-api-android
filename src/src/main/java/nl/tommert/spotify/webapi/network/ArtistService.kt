@@ -15,7 +15,7 @@ interface ArtistService {
      * @param id The Spotify ID of the artist.
      */
     @GET("$ARTISTS/{id}")
-    fun getArtist(
+    suspend fun getArtist(
         @Path("id") id: String,
     ): Artist
 
@@ -24,7 +24,7 @@ interface ArtistService {
      * @param ids A comma-separated list of the Spotify IDs for the artists. Maximum: 50 IDs.
      */
     @GET(ARTISTS)
-    fun getArtists(
+    suspend fun getArtists(
         @Query("ids") ids: String,
     ): Array<Artist>
 
@@ -44,12 +44,12 @@ interface ArtistService {
      * @param offset The index of the first item to return. Default: 0 (the first item). Use with limit to get the next set of items.
      */
     @GET("$ARTISTS/{id}/albums")
-    fun getArtistsAlbums(
+    suspend fun getArtistsAlbums(
         @Path("id") id: String,
-        @Query("include_groups") includeGroups: String?,
-        @Query("limit") limit: Int?,
-        @Query("market") market: String?,
-        @Query("offset") offset: Int?,
+        @Query("include_groups") includeGroups: String? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("market") market: String? = null,
+        @Query("offset") offset: Int? = null,
     ): Items<Album>
 
     /**
@@ -59,9 +59,9 @@ interface ArtistService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("$ARTISTS/{id}/top-tracks")
-    fun getArtistsTopTracks(
+    suspend fun getArtistsTopTracks(
         @Path("id") id: String,
-        @Query("market") market: String?,
+        @Query("market") market: String? = null,
     ): Array<Track>
 
     /**
@@ -69,7 +69,7 @@ interface ArtistService {
      * @param id The Spotify ID of the artist.
      */
     @GET("$ARTISTS/{id}/related-artists")
-    fun getArtistsRelatedArtists(
+    suspend fun getArtistsRelatedArtists(
         @Path("id") id: String,
     ): Array<Artist>
 

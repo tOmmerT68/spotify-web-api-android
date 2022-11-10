@@ -22,9 +22,9 @@ interface PlayerService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("me/player")
-    fun getPlaybackState(
-        @Query("additional_types") additionalTypes: String?,
-        @Query("market") market: String?,
+    suspend fun getPlaybackState(
+        @Query("additional_types") additionalTypes: String? = null,
+        @Query("market") market: String? = null,
     ): Playback
 
     /**
@@ -32,7 +32,7 @@ interface PlayerService {
      * @param request The request with all body parameters.
      */
     @PUT("me/player")
-    fun transferPlayback(
+    suspend fun transferPlayback(
         @Body request: PlaybackRequest,
     )
 
@@ -40,7 +40,7 @@ interface PlayerService {
      * Get information about a user’s available devices.
      */
     @GET("me/player/devices")
-    fun getAvailableDevices(): Array<Device>
+    suspend fun getAvailableDevices(): Array<Device>
 
     /**
      * Get the object currently being played on the user's Spotify account.
@@ -49,9 +49,9 @@ interface PlayerService {
      * If a valid user access token is specified in the request header, the country associated with the user account will take priority over this parameter.
      */
     @GET("me/player/currently-playing")
-    fun getCurrentlyPlayingTrack(
-        @Query("additional_types") additionalTypes: String?,
-        @Query("market") market: String?,
+    suspend fun getCurrentlyPlayingTrack(
+        @Query("additional_types") additionalTypes: String? = null,
+        @Query("market") market: String? = null,
     ): Playback
 
     /**
@@ -60,9 +60,9 @@ interface PlayerService {
      * @param request The request with all body parameters.
      */
     @PUT("me/player/play")
-    fun startPlayback(
-        @Query("device_id") deviceId: String?,
-        @Body request: PlayRequest?,
+    suspend fun startPlayback(
+        @Query("device_id") deviceId: String? = null,
+        @Body request: PlayRequest? = null,
     )
 
     /**
@@ -70,8 +70,8 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @PUT("me/player/pause")
-    fun pausePlayback(
-        @Query("device_id") deviceId: String?,
+    suspend fun pausePlayback(
+        @Query("device_id") deviceId: String? = null,
     )
 
     /**
@@ -79,8 +79,8 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @POST("me/player/next")
-    fun skipToNext(
-        @Query("device_id") deviceId: String?,
+    suspend fun skipToNext(
+        @Query("device_id") deviceId: String? = null,
     )
 
     /**
@@ -88,8 +88,8 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @POST("me/player/previous")
-    fun skipToPrevious(
-        @Query("device_id") deviceId: String?,
+    suspend fun skipToPrevious(
+        @Query("device_id") deviceId: String? = null,
     )
 
     /**
@@ -98,9 +98,9 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @PUT("me/player/seek")
-    fun seekToPosition(
+    suspend fun seekToPosition(
         @Query("position_ms") positionMs: Int,
-        @Query("device_id") deviceId: String?,
+        @Query("device_id") deviceId: String? = null,
     )
 
     /**
@@ -112,9 +112,9 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @PUT("me/player/repeat")
-    fun setRepeatMode(
+    suspend fun setRepeatMode(
         @Query("state") state: String,
-        @Query("device_id") deviceId: String?,
+        @Query("device_id") deviceId: String? = null,
     )
 
     /**
@@ -123,9 +123,9 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @PUT("me/player/volume")
-    fun setPlayerVolume(
+    suspend fun setPlayerVolume(
         @Query("volume_percent") volumePercent: Int,
-        @Query("device_id") deviceId: String?,
+        @Query("device_id") deviceId: String? = null,
     )
 
     /**
@@ -135,17 +135,17 @@ interface PlayerService {
      * @param limit The maximum number of items to return. Default: 20. Minimum: 1. Maximum: 50.
      */
     @GET("me/player/recently-played")
-    fun getRecentlyPlayedTracks(
-        @Query("after") after: Int?,
-        @Query("before") before: Int?,
-        @Query("limit") limit: Int?,
+    suspend fun getRecentlyPlayedTracks(
+        @Query("after") after: Int? = null,
+        @Query("before") before: Int? = null,
+        @Query("limit") limit: Int? = null,
     ): Items<Track>
 
     /**
      * Get the list of objects that make up the user's queue.
      */
     @GET("me/player/queue")
-    fun getUsersQueue(): Queue
+    suspend fun getUsersQueue(): Queue
 
     /**
      * Add an item to the end of the user's current playback queue.
@@ -153,8 +153,8 @@ interface PlayerService {
      * @param deviceId The id of the device this command is targeting. If not supplied, the user's currently active device is the target.
      */
     @POST("me/player/queue")
-    fun addItemToPlaybackQueue(
+    suspend fun addItemToPlaybackQueue(
         @Query("uri") uri: String,
-        @Query("device_id") deviceId: String?,
+        @Query("device_id") deviceId: String? = null,
     )
 }

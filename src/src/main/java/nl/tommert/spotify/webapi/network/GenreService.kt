@@ -9,5 +9,5 @@ interface GenreService {
      * Retrieve a list of available genres seed parameter values for recommendations.
      */
     @GET("recommendations/available-genre-seeds")
-    fun getAvailableGenreSeeds(): Genres
+    suspend fun getAvailableGenreSeeds(): Genres
 }
