@@ -4,8 +4,12 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+apply from: "${rootProject.rootDir}/publish.gradle"
+
 android {
     namespace 'nl.tommert.spotify.webapi'
+    group 'nl.tommert.spotify'
+    version '0.0.1'
     compileSdk 33
 
     defaultConfig {

@@ -1,0 +1,13 @@
+apply plugin: 'maven-publish'
+
+afterEvaluate { evaluatedProject ->
+    publishing {
+        publications {
+            mavenRelease(MavenPublication) {
+                groupId = 'nl.tommert.spotify'
+                version = '0.0.1'
+                components.release
+            }
+        }
+    }
+}
