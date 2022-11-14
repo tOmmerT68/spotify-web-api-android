@@ -17,7 +17,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PlaylistService {
+interface PlaylistService : SpotifyService {
 
     /**
      * Get a playlist owned by a Spotify user.

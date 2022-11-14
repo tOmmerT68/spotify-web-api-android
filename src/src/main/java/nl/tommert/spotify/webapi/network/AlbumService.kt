@@ -12,7 +12,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface AlbumService {
+interface AlbumService : SpotifyService {
 
     /**
      * Get Spotify catalog information for a single album.

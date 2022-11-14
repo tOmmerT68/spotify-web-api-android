@@ -3,7 +3,7 @@ package nl.tommert.spotify.webapi.network
 import nl.tommert.spotify.webapi.model.Genres
 import retrofit2.http.GET
 
-interface GenreService {
+interface GenreService : SpotifyService {
 
     /**
      * Retrieve a list of available genres seed parameter values for recommendations.

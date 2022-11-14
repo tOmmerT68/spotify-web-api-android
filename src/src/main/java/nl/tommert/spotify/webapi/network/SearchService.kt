@@ -1,9 +1,10 @@
 package nl.tommert.spotify.webapi.network
 
+import nl.tommert.spotify.webapi.model.response.SearchResult
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SearchService {
+interface SearchService : SpotifyService {
 
     /**
      * Get Spotify catalog information about albums, artists, playlists, tracks, shows, episodes or audiobooks that match a keyword string.
@@ -30,7 +31,7 @@ interface SearchService {
         @Query("limit") limit: Int? = null,
         @Query("market") market: String? = null,
         @Query("offset") offset: Int? = null,
-    )
+    ): SearchResult
 
     companion object {
 

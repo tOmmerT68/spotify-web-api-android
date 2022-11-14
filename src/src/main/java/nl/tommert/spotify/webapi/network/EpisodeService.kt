@@ -11,7 +11,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface EpisodeService {
+interface EpisodeService : SpotifyService {
 
     /**
      * Get Spotify catalog information for a single episode identified by its unique Spotify ID.

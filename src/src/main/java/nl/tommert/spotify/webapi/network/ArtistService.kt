@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ArtistService {
+interface ArtistService : SpotifyService {
 
     /**
      * Get Spotify catalog information for a single artist identified by their unique Spotify ID.

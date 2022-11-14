@@ -13,7 +13,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Query
 
-interface PlayerService {
+interface PlayerService : SpotifyService {
 
     /**
      * Get information about the user’s current playback state, including track or episode, progress, and active device.

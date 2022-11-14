@@ -3,7 +3,7 @@ package nl.tommert.spotify.webapi.network
 import nl.tommert.spotify.webapi.model.Markets
 import retrofit2.http.GET
 
-interface MarketService {
+interface MarketService : SpotifyService {
 
     /**
      * Get the list of markets where Spotify is available.

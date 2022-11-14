@@ -13,7 +13,7 @@ import nl.tommert.spotify.webapi.model.Show
 data class SearchResult(
 
     @SerializedName("tracks")
-    val tracks: Items<Track>,
+    val tracks: Items<Track>?,
 
     @SerializedName("artists")
     val artists: Items<Artist>?,

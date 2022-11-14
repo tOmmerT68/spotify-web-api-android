@@ -14,7 +14,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface TrackService {
+interface TrackService : SpotifyService {
 
     /**
      * Get Spotify catalog information for a single track identified by its unique Spotify ID.

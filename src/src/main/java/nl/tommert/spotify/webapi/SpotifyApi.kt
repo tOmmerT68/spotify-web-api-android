@@ -11,6 +11,7 @@ import nl.tommert.spotify.webapi.network.EpisodeService
 import nl.tommert.spotify.webapi.network.GenreService
 import nl.tommert.spotify.webapi.network.MarketService
 import nl.tommert.spotify.webapi.network.PlayerService
+import nl.tommert.spotify.webapi.network.PlaylistService
 import nl.tommert.spotify.webapi.network.SearchService
 import nl.tommert.spotify.webapi.network.ShowService
 import nl.tommert.spotify.webapi.network.TrackService
@@ -47,6 +48,9 @@ class SpotifyApi {
 
     fun getPlayerService(accessToken: String): PlayerService =
         provideRetrofit(accessToken).create(PlayerService::class.java)
+
+    fun getPlaylistService(accessToken: String): PlaylistService =
+        provideRetrofit(accessToken).create(PlaylistService::class.java)
 
     fun getSearchService(accessToken: String): SearchService =
         provideRetrofit(accessToken).create(SearchService::class.java)

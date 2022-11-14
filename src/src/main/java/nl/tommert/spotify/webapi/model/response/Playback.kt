@@ -39,13 +39,13 @@ data class Playback(
      * Unix Millisecond Timestamp when data was fetched.
      */
     @SerializedName("timestamp")
-    val timestamp: Int?,
+    val timestamp: Long?,
 
     /**
      * Progress into the currently playing track or episode. Can be null.
      */
     @SerializedName("progress_ms")
-    val progressMs: Int?,
+    val progressMs: Long?,
 
     /**
      * If something is currently playing, return true.

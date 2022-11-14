@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ChapterService {
+interface ChapterService : SpotifyService {
 
     /**
      * Get Spotify catalog information for a single chapter.

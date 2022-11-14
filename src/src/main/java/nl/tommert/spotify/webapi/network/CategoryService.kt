@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface CategoryService {
+interface CategoryService : SpotifyService {
 
     /**
      * Get a list of categories used to tag items in Spotify (on, for example, the Spotify player’s “Browse” tab).
