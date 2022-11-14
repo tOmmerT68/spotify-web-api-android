@@ -4,9 +4,10 @@ afterEvaluate { evaluatedProject ->
     publishing {
         publications {
             mavenRelease(MavenPublication) {
-                groupId = 'nl.tommert.spotify'
+                groupId = 'com.github.tOmmerT68'
+                artifactId = 'spotify-webapi'
                 version = '0.0.1'
-                components.release
+                from components.release
             }
         }
     }
