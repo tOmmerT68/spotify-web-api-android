@@ -2,6 +2,7 @@ package nl.tommert.spotify.webapi
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import nl.tommert.spotify.webapi.model.AccessTokenNotSetException
 import nl.tommert.spotify.webapi.network.AlbumService
 import nl.tommert.spotify.webapi.network.ArtistService
 import nl.tommert.spotify.webapi.network.AudiobookService
@@ -22,53 +23,58 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SpotifyApi {
 
-    fun getAlbumService(accessToken: String): AlbumService =
-        provideRetrofit(accessToken).create(AlbumService::class.java)
+    private lateinit var accessToken: String
 
-    fun getArtistService(accessToken: String): ArtistService =
-        provideRetrofit(accessToken).create(ArtistService::class.java)
+    fun setAccessToken(accessToken: String) {
+        this.accessToken = accessToken
+    }
 
-    fun getAudiobookService(accessToken: String): AudiobookService =
-        provideRetrofit(accessToken).create(AudiobookService::class.java)
+    fun getAlbumService(): AlbumService =
+        provideRetrofit().create(AlbumService::class.java)
 
-    fun getCategoryService(accessToken: String): CategoryService =
-        provideRetrofit(accessToken).create(CategoryService::class.java)
+    fun getArtistService(): ArtistService =
+        provideRetrofit().create(ArtistService::class.java)
 
-    fun getChapterService(accessToken: String): ChapterService =
-        provideRetrofit(accessToken).create(ChapterService::class.java)
+    fun getAudiobookService(): AudiobookService =
+        provideRetrofit().create(AudiobookService::class.java)
 
-    fun getEpisodeService(accessToken: String): EpisodeService =
-        provideRetrofit(accessToken).create(EpisodeService::class.java)
+    fun getCategoryService(): CategoryService =
+        provideRetrofit().create(CategoryService::class.java)
 
-    fun getGenreService(accessToken: String): GenreService =
-        provideRetrofit(accessToken).create(GenreService::class.java)
+    fun getChapterService(): ChapterService =
+        provideRetrofit().create(ChapterService::class.java)
 
-    fun getMarketService(accessToken: String): MarketService =
-        provideRetrofit(accessToken).create(MarketService::class.java)
+    fun getEpisodeService(): EpisodeService =
+        provideRetrofit().create(EpisodeService::class.java)
 
-    fun getPlayerService(accessToken: String): PlayerService =
-        provideRetrofit(accessToken).create(PlayerService::class.java)
+    fun getGenreService(): GenreService =
+        provideRetrofit().create(GenreService::class.java)
 
-    fun getPlaylistService(accessToken: String): PlaylistService =
-        provideRetrofit(accessToken).create(PlaylistService::class.java)
+    fun getMarketService(): MarketService =
+        provideRetrofit().create(MarketService::class.java)
 
-    fun getSearchService(accessToken: String): SearchService =
-        provideRetrofit(accessToken).create(SearchService::class.java)
+    fun getPlayerService(): PlayerService =
+        provideRetrofit().create(PlayerService::class.java)
 
-    fun getShowService(accessToken: String): ShowService =
-        provideRetrofit(accessToken).create(ShowService::class.java)
+    fun getPlaylistService(): PlaylistService =
+        provideRetrofit().create(PlaylistService::class.java)
 
-    fun getTrackService(accessToken: String): TrackService =
-        provideRetrofit(accessToken).create(TrackService::class.java)
+    fun getSearchService(): SearchService =
+        provideRetrofit().create(SearchService::class.java)
 
-    fun getUserService(accessToken: String): UserService =
-        provideRetrofit(accessToken).create(UserService::class.java)
+    fun getShowService(): ShowService =
+        provideRetrofit().create(ShowService::class.java)
 
+    fun getTrackService(): TrackService =
+        provideRetrofit().create(TrackService::class.java)
 
-    private fun provideRetrofit(accessToken: String): Retrofit {
+    fun getUserService(): UserService =
+        provideRetrofit().create(UserService::class.java)
+
+    private fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(SPOTIFY_ENDPOINT)
-            .client(provideOkHttpClient(accessToken))
+            .client(provideOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create(provideGson()))
             .build()
     }
@@ -79,7 +85,10 @@ class SpotifyApi {
             .create()
     }
 
-    private fun provideOkHttpClient(accessToken: String): OkHttpClient {
+    private fun provideOkHttpClient(): OkHttpClient {
+        if (!::accessToken.isInitialized) {
+            throw AccessTokenNotSetException()
+        }
         return OkHttpClient()
             .newBuilder()
             .addInterceptor { chain ->
