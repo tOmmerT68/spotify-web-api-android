@@ -43,22 +43,24 @@ class ExampleActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val accessToken = intent?.getStringExtra(ACCESS_TOKEN)!!
         val type = intent?.getSerializableExtra(TYPE) as Type
+        val spotifyApi = SpotifyApi()
+        spotifyApi.setAccessToken(accessToken)
         viewModel.setService(
             when (type) {
-                Type.ALBUM -> SpotifyApi().getAlbumService(accessToken)
-                Type.ARTIST -> SpotifyApi().getArtistService(accessToken)
-                Type.AUDIOBOOK -> SpotifyApi().getAudiobookService(accessToken)
-                Type.CATEGORY -> SpotifyApi().getCategoryService(accessToken)
-                Type.CHAPTER -> SpotifyApi().getChapterService(accessToken)
-                Type.EPISODE -> SpotifyApi().getEpisodeService(accessToken)
-                Type.GENRE -> SpotifyApi().getGenreService(accessToken)
-                Type.MARKET -> SpotifyApi().getMarketService(accessToken)
-                Type.PLAYER -> SpotifyApi().getPlayerService(accessToken)
-                Type.PLAYLIST -> SpotifyApi().getPlaylistService(accessToken)
-                Type.SEARCH -> SpotifyApi().getSearchService(accessToken)
-                Type.SHOW -> SpotifyApi().getShowService(accessToken)
-                Type.TRACK -> SpotifyApi().getTrackService(accessToken)
-                Type.USER -> SpotifyApi().getUserService(accessToken)
+                Type.ALBUM -> spotifyApi.getAlbumService()
+                Type.ARTIST -> spotifyApi.getArtistService()
+                Type.AUDIOBOOK -> spotifyApi.getAudiobookService()
+                Type.CATEGORY -> spotifyApi.getCategoryService()
+                Type.CHAPTER -> spotifyApi.getChapterService()
+                Type.EPISODE -> spotifyApi.getEpisodeService()
+                Type.GENRE -> spotifyApi.getGenreService()
+                Type.MARKET -> spotifyApi.getMarketService()
+                Type.PLAYER -> spotifyApi.getPlayerService()
+                Type.PLAYLIST -> spotifyApi.getPlaylistService()
+                Type.SEARCH -> spotifyApi.getSearchService()
+                Type.SHOW -> spotifyApi.getShowService()
+                Type.TRACK -> spotifyApi.getTrackService()
+                Type.USER -> spotifyApi.getUserService()
             }
         )
         setContent {

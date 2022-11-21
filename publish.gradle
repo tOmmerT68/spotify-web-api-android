@@ -6,7 +6,7 @@ afterEvaluate { evaluatedProject ->
             mavenRelease(MavenPublication) {
                 groupId = 'nl.tommert.spotify'
                 artifactId = 'spotify-webapi'
-                version = '0.0.1'
+                version = '0.0.2'
                 from components.release
             }
         }
