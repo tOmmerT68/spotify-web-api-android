@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Spotify Web API Android"
-include ':app'
-include ':src'
+include ':sample-app'
+include ':api-android'
+include ':api'
